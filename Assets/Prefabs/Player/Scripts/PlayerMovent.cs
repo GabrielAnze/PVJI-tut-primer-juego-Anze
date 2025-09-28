@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Vector3 forceToApply;
-    private float timeSinceLastForce;
-    private float intervalTime;
+    private IMovementStrategy movementStrategy;
+    private Player player = new Player();
 
     private void Start()
     {
-        forceToApply = new Vector3(0, 0, 300);
-        timeSinceLastForce = 0f;
-        intervalTime = 2f;
+        // Prueba cambiando entre estas estrategias:
+        SetMovementStrategy(new SmoothMovement());// Movimiento suave
+        // SetMovementStrategy(new AcelerateMovement()); // Movimiento acelerado
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        timeSinceLastForce += Time.fixedDeltaTime;
+        MovePlayer();
+    }
 
-        if (timeSinceLastForce >= intervalTime)
-        {
-            gameObject.GetComponent<Rigidbody>().AddForce(forceToApply);
-            timeSinceLastForce = 0f;
-        }
+    public void SetMovementStrategy(IMovementStrategy newStrategy)
+    {
+        movementStrategy = newStrategy;
+    }
+
+    private void MovePlayer()
+    {
+        movementStrategy.Move(transform, player);
     }
 }
