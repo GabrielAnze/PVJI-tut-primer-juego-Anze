@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
     private IMovementStrategy movementStrategy;
+    private Player player = new Player();
 
     private void Start()
     {
-        // Inicializamos con la estrategia suave
-        SetMovementStrategy(new SmoothMovement());
+        // Prueba cambiando entre estas estrategias:
+        SetMovementStrategy(new SmoothMovement());// Movimiento suave
+        // SetMovementStrategy(new AcelerateMovement()); // Movimiento acelerado
     }
 
     private void Update()
@@ -23,6 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        movementStrategy.Move(transform, speed);
+        movementStrategy.Move(transform, player);
     }
 }
