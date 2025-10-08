@@ -5,9 +5,8 @@ public class AcelerateMovement : IMovementStrategy
     private float currentSpeed = 0f;
     private float maxSpeed = 8f;
 
-    public void Move(Transform transform, Player player)
+    public void Move(Transform transform, Player player, float input)
     {
-        float input = Input.GetAxis("Horizontal");
         currentSpeed += input * player.Acceleration * Time.deltaTime;
         currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
         transform.Translate(currentSpeed * Time.deltaTime, 0, 0);

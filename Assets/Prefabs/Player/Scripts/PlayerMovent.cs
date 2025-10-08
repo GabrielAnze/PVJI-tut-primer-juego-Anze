@@ -5,25 +5,14 @@ public class PlayerMovement : MonoBehaviour
     private IMovementStrategy movementStrategy;
     private Player player = new Player();
 
-    private void Start()
-    {
-        // Prueba cambiando entre estas estrategias:
-        SetMovementStrategy(new SmoothMovement());// Movimiento suave
-        // SetMovementStrategy(new AcelerateMovement()); // Movimiento acelerado
-    }
-
-    private void Update()
-    {
-        MovePlayer();
-    }
-
     public void SetMovementStrategy(IMovementStrategy newStrategy)
     {
         movementStrategy = newStrategy;
     }
 
-    private void MovePlayer()
+    // NUEVO MÉTODO: Recibe el input como parámetro
+    public void MovePlayer(float input)
     {
-        movementStrategy.Move(transform, player);
+        movementStrategy.Move(transform, player, input);
     }
 }
