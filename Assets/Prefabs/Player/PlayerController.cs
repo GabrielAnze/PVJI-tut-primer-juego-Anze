@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // MOVIMIENTO HACIA ADELANTE CONSTANTE
+        ICommand forwardCommand = new ForwardMoveCommand(playerMovement);
+        forwardCommand.Execute();
+
         // Detectar input horizontal
         float horizontalInput = Input.GetAxis("Horizontal");
 
